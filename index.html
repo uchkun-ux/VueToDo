@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 3</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        input,textarea{
+            width:600px !important;
+            resize:none;
+            font-size:25px !important;
+        }
+        .time{
+            font-weight:600;
+            font-size:20px;
+            display:flex;
+            justify-content:flex-end;
+        }
+        .bg{
+            background-color:green;
+        }
+        .alert{
+            position: absolute;
+            right: 0;
+            top: 30px;
+        }
+        .active{
+        top: -100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="counter">
+        <div class="container position-relative">
+            <div class="alert alert-warning active" role="alert" :class="">No data</div>
+            <h1 class="text-center">TODOLIST</h1>
+            <div class="d-flex flex-column align-items-center gap-4">
+                <input type="text" placeholder="title" class="form-control" v-model="title">
+                <textarea placeholder="Description" class="form-control"v-model="describe"></textarea>
+                <button class="btn btn-primary" @click="addTask">Add task</button>
+            </div>
+            <div class="container">
+                <section v-for="(key,i) in list">
+                    <div class="card mt-4" :class="key.class">
+                        <div class="card-header d-flex justify-content-between">
+                            <h2>{{key.title}}</h2>
+                            <div class="card-btns d-flex align-items-center gap-4">
+                                <button @click="change(i)" v-if="key.done" class="btn btn-success">Done</button>
+                                <button @click="change(i)" v-if="!key.done" class="btn btn-primary">Undo</button>
+                                <button class="btn btn-warning">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+                            <p>{{key.describe}}</p>
+                            <span class="time"> {{key.time}}</span>
+
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+        </div>
+        
+    </div>
+    
+
+
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
