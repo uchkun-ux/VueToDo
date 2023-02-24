@@ -3,35 +3,47 @@ const object = {
         return {
         list:[],
         title:"",
-        describe:""
+        describe:"",
+        start: ""
         }
     },
     methods:{
         addTask(){
-            if (this.title=="" || this.describe == ""){
+            if (this.title=="" || this.describe == "") {
                 this.start = "active"
                 setTimeout(()=>{
                 this.start = ""
                 },1000);
             }
-            else{
+            else {
                 this.list.push({
                     title: this.title, 
                     describe:this.describe,
                     time: new Date().toLocaleString(),
                     done: true,
-                    class: ""
-                })
-            }
-            this.title = ""
-            this.describe = ""
+                    class: "",
+                    edit:true,
+                    visible:true
+                });
+                this.title = ""
+                this.describe = ""
+            } 
         },
-        change(i){
+        change(i) {
             this.list.forEach((el, index) => {
-                if (i==index){
+                if (i == index){
                 el.done = !el.done
                 el.class = el.class == "" ? "bg" : ""
-            }
+                }
+            });
+        }, 
+        editSave(i){
+            this.list.forEach((el, index)=>{
+                if (i==index){
+                    el.edit = !el.edit
+                    el.visible = !el.visible
+                    el.time = new Date().toLocaleString()
+                }
             });
         }
     }

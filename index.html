@@ -11,33 +11,34 @@
             width:600px !important;
             resize:none;
             font-size:25px !important;
+            border:none;
         }
-        .time{
+        .time {
             font-weight:600;
             font-size:20px;
             display:flex;
             justify-content:flex-end;
         }
-        .bg{
+        .bg {
             background-color:green;
         }
-        .alert{
+        .alert {
             position: absolute;
             right: 0;
             top: -100px;
             transition: 1s;
 
         }
-        .active{
+        .active {
         top: 30px;
 
         }
     </style>
 </head>
 <body>
-    <div class="counter">
+    <div class="counter">  
         <div class="container position-relative">
-            <div class="alert alert-warning active" role="alert" :class="">No data</div>
+            <div class="alert alert-warning active" role="alert" :class="start">Alert No data</div>
             <h1 class="text-center">TODOLIST</h1>
             <div class="d-flex flex-column align-items-center gap-4">
                 <input type="text" placeholder="title" class="form-control" v-model="title">
@@ -48,17 +49,20 @@
                 <section v-for="(key,i) in list">
                     <div class="card mt-4" :class="key.class">
                         <div class="card-header d-flex justify-content-between">
-                            <h2>{{key.title}}</h2>
+                            <h2 v-if="key.visible">{{key.title}}</h2>
+                            <input @keydown.enter="editSave(i)" v-if="!key.visible" type="text" v-model="key.title">
                             <div class="card-btns d-flex align-items-center gap-4">
                                 <button @click="change(i)" v-if="key.done" class="btn btn-success">Done</button>
                                 <button @click="change(i)" v-if="!key.done" class="btn btn-primary">Undo</button>
-                                <button class="btn btn-warning">Edit</button>
+                                <button @click="editSave(i)" v-if="key.edit" class="btn btn-warning">Edit</button>
+                                <button @click="editSave(i)" v-if="!key.edit" class="btn btn-info">Save</button>
                                 <button class="btn btn-danger">Delete</button>
                             </div>
 
                         </div>
                         <div class="card-body">
-                            <p>{{key.describe}}</p>
+                            <p v-if="!key.visible">{{key.describe}}</p>
+                            <textarea @keydown.enter="editSave" v-if="!key.visible" v-model="key.describe"></textarea>
                             <span class="time"> {{key.time}}</span>
 
                         </div>
