@@ -9,15 +9,20 @@ const object = {
     methods:{
         addTask(){
             if (this.title=="" || this.describe == ""){
-
+                this.start = "active"
+                setTimeout(()=>{
+                this.start = ""
+                },1000);
             }
-            this.list.push({
-                title: this.title, 
-                describe:this.describe,
-                time: new Date().toLocaleString(),
-                done: true,
-                class: ""
-            })
+            else{
+                this.list.push({
+                    title: this.title, 
+                    describe:this.describe,
+                    time: new Date().toLocaleString(),
+                    done: true,
+                    class: ""
+                })
+            }
             this.title = ""
             this.describe = ""
         },
