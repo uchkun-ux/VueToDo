@@ -45,6 +45,17 @@ const object = {
                     el.time = new Date().toLocaleString()
                 }
             });
+        },
+
+        // del(i) {
+        //     this.list.forEach((el, index) => {
+        //         if (i == index) {
+        //             this.list.splice(i,1)
+        // //         }
+        //     })
+        // }
+        del(i){
+            this.list.splice(i, 1)
         }
     }
 }

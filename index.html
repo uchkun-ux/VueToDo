@@ -42,7 +42,7 @@
             <h1 class="text-center">TODOLIST</h1>
             <div class="d-flex flex-column align-items-center gap-4">
                 <input type="text" placeholder="title" class="form-control" v-model="title">
-                <textarea placeholder="Description" class="form-control"v-model="describe"></textarea>
+                <textarea placeholder="Description" class="form-control" v-model="describe"></textarea>
                 <button class="btn btn-primary" @click="addTask">Add task</button>
             </div>
             <div class="container">
@@ -56,7 +56,7 @@
                                 <button @click="change(i)" v-if="!key.done" class="btn btn-primary">Undo</button>
                                 <button @click="editSave(i)" v-if="key.edit" class="btn btn-warning">Edit</button>
                                 <button @click="editSave(i)" v-if="!key.edit" class="btn btn-info">Save</button>
-                                <button class="btn btn-danger">Delete</button>
+                                <button class="btn btn-danger" @click="del(i)">Delete</button> 
                             </div>
 
                         </div>
